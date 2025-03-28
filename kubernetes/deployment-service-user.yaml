@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: 22i0888/user-service:latest
+          image: 22i1110/user-service:latest
           ports:
             - containerPort: 3000
           env:
