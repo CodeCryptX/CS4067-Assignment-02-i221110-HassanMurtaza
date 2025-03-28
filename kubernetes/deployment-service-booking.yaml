@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: booking-service
-  namespace: OnlineEventBookingAteeb
+  namespace: online-event-booking-hassan
 spec:
   replicas: 1
   selector:
@@ -14,40 +14,40 @@ spec:
         app: booking-service
     spec:
       containers:
-      - name: booking-service
-        image: 22i0888/booking-service:latest
-        ports:
-        - containerPort: 3002
-        env:
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: app-config
-              key: db-host
-        - name: DB_USER
-          value: root
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-secrets
-              key: db-password
-        - name: DB_NAME
-          value: booking_db
-        - name: RABBITMQ_URL
-          valueFrom:
-            configMapKeyRef:
-              name: app-config
-              key: rabbitmq-url
+        - name: booking-service
+          image: 22i1110/booking-service:latest
+          ports:
+            - containerPort: 3002
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: db-host
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: db-password
+            - name: DB_NAME
+              value: booking_db
+            - name: RABBITMQ_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: rabbitmq-url
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: booking-service
-  namespace: OnlineEventBookingAteeb
+  namespace: online-event-booking-hassan
 spec:
   selector:
     app: booking-service
   ports:
-  - protocol: TCP
-    port: 3002
-    targetPort: 3002
+    - protocol: TCP
+      port: 3002
+      targetPort: 3002

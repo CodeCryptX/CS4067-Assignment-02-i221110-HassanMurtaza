@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: event-service
-  namespace: OnlineEventBookingHassan
+  namespace: online-event-booking-hassan
 spec:
   replicas: 1
   selector:
@@ -29,7 +29,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: event-service
-  namespace: OnlineEventBookingHassan
+  namespace: online-event-booking-hassan
 spec:
   selector:
     app: event-service
