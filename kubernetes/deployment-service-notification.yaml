@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service
+  namespace: OnlineEventBookingAteeb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-service
+  template:
+    metadata:
+      labels:
+        app: notification-service
+    spec:
+      containers:
+      - name: notification-service
+        image: 22i0888/notification-service:latest
+        ports:
+        - containerPort: 3003
+        env:
+        - name: RABBITMQ_URL
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: rabbitmq-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-service
+  namespace: OnlineEventBookingAteeb
+spec:
+  selector:
+    app: notification-service
+  ports:
+  - protocol: TCP
+    port: 3003
+    targetPort: 3003

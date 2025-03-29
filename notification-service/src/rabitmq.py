@@ -16,7 +16,7 @@ if not RABBITMQ_URL:
 def consume_messages():
     connection = pika.BlockingConnection(pika.URLParameters(RABBITMQ_URL))
     channel = connection.channel()
-    channel.queue_declare(queue='notifications')
+    channel.queue_declare(queue='notifications', durable=True)
 
     def callback(ch, method, properties, body):
         message = json.loads(body)

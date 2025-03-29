@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: OnlineEventBookingAteeb
+data:
+  db-host: mysql
+  db-name: event_booking
+  mongo-uri: mongodb://mongodb:27017
+  rabbitmq-url: amqps://dvbqimoe:vDgguisUVHY2Kme9uEMu8O8w21HnkS6V@jackal.rmq.cloudamqp.com/dvbqimoe

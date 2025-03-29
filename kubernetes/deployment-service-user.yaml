@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  namespace: OnlineEventBookingAteeb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: 22i0888/user-service:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: mysql
+        - name: DB_USER
+          value: root
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: db-password
+        - name: DB_NAME
+          value: event_booking
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  namespace: OnlineEventBookingAteeb
+spec:
+  selector:
+    app: user-service
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
